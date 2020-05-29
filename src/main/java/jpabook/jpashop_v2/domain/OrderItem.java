@@ -1,73 +1,31 @@
 package jpabook.jpashop_v2.domain;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-public class OrderItem
+@Getter @Setter
+@Table(name="order_item")
+public class  OrderItem
 {
-    @Id @GeneratedValue @Column(name="ORDER_ITEM_ID")
+    @GeneratedValue
+    @Id @Column(name = "order_item_id")
     private Long id;
 
-//    @Column(name="ORDER_ID")
-//    private Long orderId;
-
-    // 외래키의 주인은 나야 나 ~~~
-    @ManyToOne
-    @JoinColumn(name="ORDER_ID")
-    private Orders order;
-
-//    @Column(name="ITEM_ID")
-//    private Long itemId;
-
-    // 외래키의 주인은 나야 나 ~~~
-    @ManyToOne
-    @JoinColumn(name="ITEM_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="item_id")
     private Item item;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="order_id")
+    private Order order;//주문
 
-    private int orderPrice;
+    @Column(name = "order_price")
+    private int orderPrice;// 주문 가격
 
-    private int count;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Orders getOrder() {
-        return order;
-    }
-
-    public void setOrder(Orders order) {
-        this.order = order;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public int getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(int orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
+    private int count;// 주문 수량
 
 }
