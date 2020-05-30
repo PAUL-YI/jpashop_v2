@@ -2,7 +2,6 @@ package jpabook.jpashop_v2.repository;
 
 import jpabook.jpashop_v2.domain.Member;
 import org.assertj.core.api.Assertions;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 //import org.junit.Test;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class MemberRepositoryTest
 {
 
@@ -26,15 +24,15 @@ public class MemberRepositoryTest
     {
         //given
         Member member = new Member();
-        member.setUserName("memberB");
+        member.setName("memberB");
 
         //when
-        Long savedId = memberRepository.save(member);
-        Member findMember = memberRepository.findMember(savedId);
+        memberRepository.save(member);
+        Member findMember = memberRepository.findOne(member.getId());
 
         //then
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
-        Assertions.assertThat(findMember.getUserName()).isEqualTo(member.getUserName());
+        Assertions.assertThat(findMember.getName()).isEqualTo(member.getName());
 
         System.out.println("findMember == member : " + (findMember==member));
     }
