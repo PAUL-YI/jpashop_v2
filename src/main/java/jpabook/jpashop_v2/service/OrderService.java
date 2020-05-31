@@ -35,10 +35,6 @@ public class OrderService
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
         delivery.setDeliveryStatus(DeliveryStatus.READY);
-        System.out.println("===================");
-        System.out.println("item.getPrice():"+item.getPrice());
-        System.out.println("count:"+count);
-        System.out.println("===================");
         // 주문 상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(),count);
 

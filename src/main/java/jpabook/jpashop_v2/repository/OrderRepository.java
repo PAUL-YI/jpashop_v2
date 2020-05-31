@@ -1,6 +1,7 @@
 package jpabook.jpashop_v2.repository;
 
 import jpabook.jpashop_v2.domain.Order;
+import jpabook.jpashop_v2.domain.OrderSearch;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class OrderRepository
         return em.find(Order.class,id);
     }
 
-//    public List<Order> findAll(OrderSearch orderSearch){}
+//    public List<Order> findAll(OrderSearch orderSearch)
+//    {
+//        //querydsl 쓰자
+//    }
 
 }
