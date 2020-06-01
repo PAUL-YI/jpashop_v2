@@ -87,4 +87,16 @@ public class MemberService
     {
         return memberRepository.findOne(id);
     }
+
+    /**
+     * member -> 영속 상태 / setName 이름 바꿔주면, 종료되면, 스프링 aop 가 동작하면서 트랜잭션 어노테이션에 의해서 트랜잭션 관련 aop 끝나는 시점에 커밋하고 jpa 가 플러시하고 database transaction 커밋하고
+     * @param id
+     * @param name
+     */
+    @Transactional
+    public void update(Long id, String name)
+    {
+        Member member = memberRepository.findOne(id);// 트랜잭션(어노테이션) 있는 상태에서 가져오면, 영속성 컨텍스트에서 가지고 옴,
+        member.setName(name);//바꾸면, 트랜잭션이 끝나고 commit 되는 시점에서 jpa가 변경감지 실행합니다.
+    }
 }
